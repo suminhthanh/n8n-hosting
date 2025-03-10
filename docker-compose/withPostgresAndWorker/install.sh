@@ -19,8 +19,9 @@ apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
 echo "--------- 🟢 Start docker compose up  -----------"
 wget https://raw.githubusercontent.com/suminhthanh/n8n-hosting/refs/heads/main/docker-compose/withPostgresAndWorker/docker-compose.yml -O compose.yaml
 
-export EXTERNAL_IP=$(cat /dev/urandom | tr -dc 'a-z0-9' | fold -w 6 | head -n 1).n8nhosting.app
+export INTERNAL_IP=$(hostname -I | cut -f1 -d' ')
+export EXTERNAL_IP=https://$(cat /dev/urandom | tr -dc 'a-z0-9' | fold -w 6 | head -n 1).n8nhosting.app
 echo "Using domain: $EXTERNAL_IP"
 
 sudo -E docker compose up -d
-echo "--------- 🔴 Finish! Wait a few minutes and test in browser at url $EXTERNAL_IP for n8n UI -----------"
+echo "--------- 🔴 Finish! Wait a few minutes and test in browser at url $EXTERNAL_IP for n8n UI FROM INTERNAL_IP=$INTERNAL_IP -----------"
