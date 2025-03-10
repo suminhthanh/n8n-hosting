@@ -16,7 +16,21 @@ apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
 # sudo chmod -R 755 vol_n8n
 # echo "--------- 🔴 Finish creating folder -----------"
 
+DOCKER_VERSION="27.0"
+
+curl -s https://releases.rancher.com/install-docker/${DOCKER_VERSION}.sh | sh 2>&1
+if ! [ -x "$(command -v docker)" ]; then
+    curl -s https://get.docker.com | sh -s -- --version ${DOCKER_VERSION} 2>&1
+    if ! [ -x "$(command -v docker)" ]; then
+        echo " - Docker installation failed."
+        echo "   Maybe your OS is not supported?"
+        echo " - Please visit https://docs.docker.com/engine/install/ and install Docker manually to continue."
+        exit 1
+    fi
+fi
+
 echo "--------- 🟢 Start docker compose up  -----------"
+wget https://raw.githubusercontent.com/suminhthanh/n8n-hosting/refs/heads/main/docker-compose/withPostgresAndWorker/.env -O .env
 wget https://raw.githubusercontent.com/suminhthanh/n8n-hosting/refs/heads/main/docker-compose/withPostgresAndWorker/docker-compose.yml -O compose.yaml
 
 export INTERNAL_IP=$(hostname -I | cut -f1 -d' ')
