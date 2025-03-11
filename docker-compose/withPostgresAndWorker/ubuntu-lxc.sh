@@ -3,17 +3,16 @@ source <(curl -s https://raw.githubusercontent.com/community-scripts/ProxmoxVE/m
 # Copyright (c) 2021-2025 tteck
 # Author: tteck (tteckster)
 # License: MIT | https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
-# Source: https://n8n.io/
+# Source: https://ubuntu.com/
 
 echo -e "Loading..."
-APP="n8n"
-var_tags="automation"
-var_cpu="2"
-var_ram="2048"
-var_disk="6"
+APP="Ubuntu"
+var_tags="os"
+var_cpu="1"
+var_ram="1024"
+var_disk="8"
 var_os="ubuntu"
 var_version="24.04"
-var_unprivileged="1"
 
 header_info "$APP"
 variables
