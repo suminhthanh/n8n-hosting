@@ -3,16 +3,17 @@ source <(curl -s https://raw.githubusercontent.com/community-scripts/ProxmoxVE/m
 # Copyright (c) 2021-2025 tteck
 # Author: tteck (tteckster)
 # License: MIT | https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
-# Source: https://ubuntu.com/
+# Source: https://n8n.io/
 
 echo -e "Loading..."
-APP="Ubuntu"
-var_tags="os"
-var_cpu="1"
-var_ram="1024"
+APP="n8n"
+var_tags="automation"
+var_cpu="2"
+var_ram="2048"
 var_disk="8"
 var_os="ubuntu"
-var_version="24.04"
+var_version="24.10"
+var_unprivileged="1"
 
 header_info "$APP"
 variables
@@ -21,19 +22,19 @@ catch_errors
 
 function install_docker() {
   echo "--------- 🟢 Start install docker -----------"
-  sudo apt-get update -y
-  sudo apt-get install -y ca-certificates curl
-  sudo install -m 0755 -d /etc/apt/keyrings
-  sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
-  sudo chmod a+r /etc/apt/keyrings/docker.asc
+  $STD apt-get update -y
+  $STD apt-get install -y ca-certificates curl
+  $STD install -m 0755 -d /etc/apt/keyrings
+  $STD curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+  $STD chmod a+r /etc/apt/keyrings/docker.asc
 
   echo \  
     "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \  
     $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") stable" | \  
-    sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+    $STD tee /etc/apt/sources.list.d/docker.list > /dev/null
   
-  sudo apt-get update -y
-  sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
+  $STD apt-get update -y
+  $STD apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
   echo "--------- 🔴 Finish install docker -----------"
 }
 
@@ -50,7 +51,7 @@ function setup_n8n() {
   --header "Content-Type: application/json" \
   --data "{\"service\": \"http://$INTERNAL_IP:5678\",\"hostname\": \"$EXTERNAL_IP\"}"
 
-  sudo -E docker compose up -d
+  $STD -E docker compose up -d
   echo "--------- 🔴 Finish! Wait a few minutes and test in browser at url $EXTERNAL_IP for n8n UI FROM INTERNAL_IP=$INTERNAL_IP -----------"
 }
 
