@@ -6,7 +6,7 @@ source <(curl -s https://raw.githubusercontent.com/community-scripts/ProxmoxVE/m
 # Source: https://ubuntu.com/
 
 echo -e "Loading..."
-APP="Ubuntu"
+APP="n8n"
 var_tags="os"
 var_cpu="1"
 var_ram="1024"
@@ -23,7 +23,7 @@ function update_script() {
   header_info
   check_container_storage
   check_container_resources
-  $STD curl -fsSL https://raw.githubusercontent.com/suminhthanh/n8n-hosting/main/docker-compose/withPostgresAndWorker/install.sh | bash
+  curl -fsSL https://raw.githubusercontent.com/suminhthanh/n8n-hosting/main/docker-compose/withPostgresAndWorker/install.sh | bash
 }
 
 start
