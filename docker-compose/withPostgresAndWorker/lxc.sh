@@ -1,8 +1,9 @@
 #!/bin/bash
 
-# Tìm ID LXC mới
-NEW_ID=$(pvesh get /cluster/resources --type vm | awk '$2 ~ /^lxc$/ {print $1}' | sort -n | tail -1)
-NEW_ID=$((NEW_ID + 1))
+# Lấy ID tiếp theo tự động từ Proxmox
+NEW_ID=$(pvesh get /cluster/nextid)
+
+echo "Sẽ tạo LXC mới với ID: $NEW_ID"
 
 # Clone LXC container
 pct clone 201 $NEW_ID --hostname n8n
