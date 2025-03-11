@@ -1,3 +1,6 @@
+#!/bin/bash
+echo "--------- 🟢 Start install domain -----------"
+
 export INTERNAL_IP=$(hostname -I | cut -f1 -d' ')
 export EXTERNAL_IP=https://$(cat /dev/urandom | tr -dc 'a-z0-9' | fold -w 6 | head -n 1).n8nhosting.app
 
