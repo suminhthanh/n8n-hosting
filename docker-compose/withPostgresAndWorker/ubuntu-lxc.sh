@@ -21,19 +21,19 @@ catch_errors
 
 function install_docker() {
   echo "--------- 🟢 Start install docker -----------"
-  $STD apt-get update -y
-  $STD apt-get install -y ca-certificates curl
-  $STD install -m 0755 -d /etc/apt/keyrings
-  $STD curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
-  $STD chmod a+r /etc/apt/keyrings/docker.asc
+  apt-get update -y
+  apt-get install -y ca-certificates curl
+  install -m 0755 -d /etc/apt/keyrings
+  curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+  chmod a+r /etc/apt/keyrings/docker.asc
 
   echo \  
     "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \  
     $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") stable" | \  
-    $STD tee /etc/apt/sources.list.d/docker.list > /dev/null
+    tee /etc/apt/sources.list.d/docker.list > /dev/null
   
-  $STD apt-get update -y
-  $STD apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
+  apt-get update -y
+  apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
   echo "--------- 🔴 Finish install docker -----------"
 }
 
@@ -50,7 +50,7 @@ function setup_n8n() {
   --header "Content-Type: application/json" \
   --data "{\"service\": \"http://$INTERNAL_IP:5678\",\"hostname\": \"$EXTERNAL_IP\"}"
 
-  $STD -E docker compose up -d
+  -E docker compose up -d
   echo "--------- 🔴 Finish! Wait a few minutes and test in browser at url $EXTERNAL_IP for n8n UI FROM INTERNAL_IP=$INTERNAL_IP -----------"
 }
 
