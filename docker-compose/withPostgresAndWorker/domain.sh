@@ -2,7 +2,7 @@
 echo "--------- 🟢 Start install domain -----------"
 
 export INTERNAL_IP=$(hostname -I | cut -f1 -d' ')
-export EXTERNAL_IP=https://$(cat /dev/urandom | tr -dc 'a-z0-9' | fold -w 6 | head -n 1).n8nhosting.app
+export EXTERNAL_IP="https://$(uuidgen | tr -d '-' | cut -c1-6).n8nhosting.app"
 
 # Ghi vào file .env
 echo "INTERNAL_IP=$INTERNAL_IP" >> .env

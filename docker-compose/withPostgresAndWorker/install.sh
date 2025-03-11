@@ -28,7 +28,7 @@ wget https://raw.githubusercontent.com/suminhthanh/n8n-hosting/refs/heads/main/d
 wget https://raw.githubusercontent.com/suminhthanh/n8n-hosting/refs/heads/main/docker-compose/withPostgresAndWorker/docker-compose.yml -O compose.yaml
 
 export INTERNAL_IP=$(hostname -I | cut -f1 -d' ')
-export EXTERNAL_IP=https://$(cat /dev/urandom | tr -dc 'a-z0-9' | fold -w 6 | head -n 1).n8nhosting.app
+export EXTERNAL_IP="https://$(uuidgen | tr -d '-' | cut -c1-6).n8nhosting.app"
 echo "Using domain: $EXTERNAL_IP"
 
 curl --location "https://n8n-auto.vnict.workers.dev/" \
