@@ -1,6 +1,9 @@
 #!/bin/bash
 echo "--------- 🟢 Start install domain -----------"
 
+NEW_ID=$1
+echo "Source ID: $NEW_ID"
+
 export INTERNAL_IP=$(hostname -I | cut -f1 -d' ')
 export EXTERNAL_IP="https://$(uuidgen | tr -d '-' | cut -c1-6).n8nhosting.app"
 
@@ -14,7 +17,8 @@ curl --location "https://n8n-auto.vnict.workers.dev/" \
 --header "Content-Type: application/json" \
 --data "{
     \"service\": \"http://$INTERNAL_IP:5678\",
-    \"hostname\": \"$EXTERNAL_IP\"
+    \"hostname\": \"$EXTERNAL_IP\",
+    \"id\": \"$NEW_ID\"
 }"
 
 sudo -E docker compose up -d

@@ -21,6 +21,6 @@ done
 
 # Chạy script domain.sh bên trong container
 echo "Chạy script domain.sh bên trong container..."
-pct exec $NEW_ID -- bash -c "curl -fsSL https://raw.githubusercontent.com/suminhthanh/n8n-hosting/main/docker-compose/withPostgresAndWorker/domain.sh | bash"
+pct exec $NEW_ID -- bash -c "curl -fsSL -o- https://raw.githubusercontent.com/suminhthanh/n8n-hosting/main/docker-compose/withPostgresAndWorker/domain.sh | bash -s -- $NEW_ID"
 
 echo "LXC $NEW_ID đã sẵn sàng!"
