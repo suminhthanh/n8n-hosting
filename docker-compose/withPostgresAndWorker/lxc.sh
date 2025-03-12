@@ -9,7 +9,7 @@ NEW_ID=$(pvesh get /cluster/nextid)
 echo "Sẽ tạo LXC mới với ID: $NEW_ID"
 
 # Clone LXC container
-pct clone $SOURCE_ID $NEW_ID --hostname n8n
+pct clone $SOURCE_ID $NEW_ID --hostname n8n --full
 pct start $NEW_ID
 
 # Chờ container khởi động hoàn toàn
