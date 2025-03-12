@@ -3,10 +3,14 @@
 # Lấy ID tiếp theo tự động từ Proxmox
 NEW_ID=$(pvesh get /cluster/nextid)
 
+# Nhập ID của container cần clone từ bàn phím
+echo "Nhập ID của container cần clone (ví dụ: 201):"
+read -p "ID: " SOURCE_ID
+
 echo "Sẽ tạo LXC mới với ID: $NEW_ID"
 
 # Clone LXC container
-pct clone 201 $NEW_ID --hostname n8n
+pct clone $SOURCE_ID $NEW_ID --hostname n8n
 pct start $NEW_ID
 
 # Chờ container khởi động hoàn toàn
