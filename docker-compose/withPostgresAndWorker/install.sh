@@ -26,6 +26,7 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
 echo "--------- 🟢 Start docker compose up  -----------"
 wget https://raw.githubusercontent.com/suminhthanh/n8n-hosting/refs/heads/main/docker-compose/withPostgresAndWorker/.env -O .env
 wget https://raw.githubusercontent.com/suminhthanh/n8n-hosting/refs/heads/main/docker-compose/withPostgresAndWorker/docker-compose.yml -O compose.yaml
+wget http://ava.webpilot.cc/n8n/Dockerfile-ffmpeg -O Dockerfile-ffmpeg
 
 export INTERNAL_IP=$(hostname -I | cut -f1 -d' ')
 export EXTERNAL_IP="https://$(uuidgen | tr -d '-' | cut -c1-6).n8nhosting.app"

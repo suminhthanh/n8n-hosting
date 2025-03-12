@@ -1,4 +1,4 @@
-version: '3.8'
+# version: '3.8'
 
 volumes:
   db_storage:
@@ -7,7 +7,9 @@ volumes:
 
 x-shared: &shared
   restart: always
-  image: docker.n8n.io/n8nio/n8n
+  build:
+    context: .
+    dockerfile: Dockerfile-ffmpeg
   environment:
     - N8N_SECURE_COOKIE=false
     - GENERIC_TIMEZONE=Asia/Ho_Chi_Minh
