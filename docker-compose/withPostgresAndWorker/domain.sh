@@ -4,14 +4,14 @@ echo "--------- 🟢 Start install domain -----------"
 NEW_ID=$1
 echo "Source ID: $NEW_ID"
 
-export INTERNAL_IP=$(hostname -I | cut -f1 -d' ')
-export EXTERNAL_IP="https://$(uuidgen | tr -d '-' | cut -c1-6).n8nhosting.app"
-
 # Check if INTERNAL_IP exists in .env and exit if found
 if grep -q "^INTERNAL_IP=" .env; then
     echo "INTERNAL_IP already exists in .env. Skipping and exiting."
     exit 0
 fi
+
+export INTERNAL_IP=$(hostname -I | cut -f1 -d' ')
+export EXTERNAL_IP="https://$(uuidgen | tr -d '-' | cut -c1-6).n8nhosting.app"
 
 # Append to .env if not exists
 echo "INTERNAL_IP=$INTERNAL_IP" >> .env
