@@ -7,7 +7,13 @@ echo "Source ID: $NEW_ID"
 export INTERNAL_IP=$(hostname -I | cut -f1 -d' ')
 export EXTERNAL_IP="https://$(uuidgen | tr -d '-' | cut -c1-6).n8nhosting.app"
 
-# Ghi vào file .env
+# Check if INTERNAL_IP exists in .env and exit if found
+if grep -q "^INTERNAL_IP=" .env; then
+    echo "INTERNAL_IP already exists in .env. Skipping and exiting."
+    exit 0
+fi
+
+# Append to .env if not exists
 echo "INTERNAL_IP=$INTERNAL_IP" >> .env
 echo "EXTERNAL_IP=$EXTERNAL_IP" >> .env
 
@@ -22,4 +28,4 @@ curl --location "https://n8n-auto.vnict.workers.dev/" \
 }"
 
 sudo -E docker compose up -d
-echo "--------- 🔴 Finish! Wait a few minutes and test in browser at url $EXTERNAL_IP for n8n UI FROM INTERNAL_IP=$INTERNAL_IP -----------"
+echo "--------- 🔴 Finish! Test in browser at $EXTERNAL_IP (Internal IP: $INTERNAL_IP) -----------"
