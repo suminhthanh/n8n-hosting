@@ -27,7 +27,6 @@ x-shared: &shared
     - N8N_ENCRYPTION_KEY=${ENCRYPTION_KEY}
   links:
     - postgres
-    # - redis
   volumes:
     - n8n_storage:/home/node/.n8n
   depends_on:
