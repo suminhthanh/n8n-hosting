@@ -21,9 +21,9 @@ x-shared: &shared
     - DB_POSTGRESDB_DATABASE=${POSTGRES_DB}
     - DB_POSTGRESDB_USER=${POSTGRES_NON_ROOT_USER}
     - DB_POSTGRESDB_PASSWORD=${POSTGRES_NON_ROOT_PASSWORD}
-    - EXECUTIONS_MODE=queue
-    - QUEUE_BULL_REDIS_HOST=redis
-    - QUEUE_HEALTH_CHECK_ACTIVE=true
+    # - EXECUTIONS_MODE=queue
+    # - QUEUE_BULL_REDIS_HOST=redis
+    # - QUEUE_HEALTH_CHECK_ACTIVE=true
     - N8N_ENCRYPTION_KEY=${ENCRYPTION_KEY}
   links:
     - postgres
@@ -55,16 +55,16 @@ services:
       timeout: 5s
       retries: 10
 
-  redis:
-    image: redis:6-alpine
-    restart: always
-    volumes:
-      - redis_storage:/data
-    healthcheck:
-      test: ['CMD', 'redis-cli', 'ping']
-      interval: 5s
-      timeout: 5s
-      retries: 10
+  # redis:
+  #   image: redis:6-alpine
+  #   restart: always
+  #   volumes:
+  #     - redis_storage:/data
+  #   healthcheck:
+  #     test: ['CMD', 'redis-cli', 'ping']
+  #     interval: 5s
+  #     timeout: 5s
+  #     retries: 10
 
   n8n:
     <<: *shared
