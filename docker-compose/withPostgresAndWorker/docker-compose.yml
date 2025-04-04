@@ -25,6 +25,7 @@ x-shared: &shared
     - N8N_CUSTOM_EXTENSIONS=n8n-nodes-zalo-user
     - N8N_DIAGNOSTICS_ENABLED=false
     - N8N_COMMUNITY_PACKAGES_ALLOW_TOOL_USAGE=true
+    - N8N_DEFAULT_LOAD_ALL_NODES=false
   links:
     - postgres
   volumes:
