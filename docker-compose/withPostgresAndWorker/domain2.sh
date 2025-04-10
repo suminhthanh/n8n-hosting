@@ -55,8 +55,8 @@ if [ -f "$SERVICE_FILE" ]; then
     systemctl daemon-reload
     systemctl restart n8n
     
-    sleep 10
-    sudo systemctl status n8n
+    # sleep 10
+    # sudo systemctl status n8n
 
     echo "Systemd service updated and n8n restarted."
 else
