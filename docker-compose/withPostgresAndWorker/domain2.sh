@@ -25,7 +25,7 @@ curl --location "https://n8n-auto.vnict.workers.dev/" \
 --data "{
     \"service\": \"http://$INTERNAL_IP:5678\",
     \"hostname\": \"$EXTERNAL_IP\",
-    \"id\": \"$NEW_ID\"
+    \"id\": \"8007$NEW_ID\"
 }"
 
 # Update n8n.service file
