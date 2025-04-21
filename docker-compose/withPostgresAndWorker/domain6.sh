@@ -20,7 +20,7 @@ echo "EXTERNAL_IP=$EXTERNAL_IP" >> .env
 echo "Using domain: $EXTERNAL_IP"
 
 # Register domain
-curl --location "https://n8napp-auto.vnict.workers.dev/" \
+curl --location "https://n8nhost-auto.vnict.workers.dev/" \
 --header "Content-Type: application/json" \
 --data "{
     \"service\": \"http://$INTERNAL_IP:5678\",
