@@ -11,7 +11,7 @@ echo "Source ID: $NEW_ID"
 # fi
 
 export INTERNAL_IP=$(hostname -I | cut -f1 -d' ')
-export EXTERNAL_IP="https://$(uuidgen | tr -d '-' | cut -c1-6).n8nhosting.app"
+export EXTERNAL_IP="https://$(uuidgen | tr -d '-' | cut -c1-6).n8napp.site"
 
 # Append to .env
 echo "INTERNAL_IP=$INTERNAL_IP" >> .env
